@@ -149,3 +149,33 @@ body {
   line-height: 1.15;
   font-weight: 400;
 }
+
+.desktop-hero {
+  background-image: url("/assets/home/mobile/image-header.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  top: 0;
+}
+
+@media (min-width: 640px) {
+  /* sm */
+  .desktop-hero {
+    background-image: url("/assets/home/tablet/image-header.jpg");
+  }
+}
+
+@media (min-width: 768px) {
+  /* md */
+  .desktop-hero {
+    height: 100vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* lg */
+  .desktop-hero {
+    background-image: url("/assets/home/desktop/image-hero.jpg");
+    top: -20px;
+  }
+}

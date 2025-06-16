@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "./Button";
+import Image from "next/image";
 
 interface HeroProps {
   className?: string;
@@ -28,19 +29,23 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
             <Link href="/headphones/xx99-mark-ii">
               <Button
                 size="lg"
-                className="px-8 py-4 text-sm font-bold uppercase tracking-wider"
+                className="px-8 py-4 text-sm font-bold uppercase tracking-wider rounded-0 "
               >
                 See Product
               </Button>
             </Link>
           </div>
 
-          {/* Image Placeholder */}
-          <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-            <div className="w-80 h-80 lg:w-96 lg:h-96 xl:w-[450px] xl:h-[450px] bg-gray-700 rounded-full flex items-center justify-center">
-              <div className="w-64 h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 bg-gray-600 rounded-full flex items-center justify-center">
-                <span className="text-gray-400 text-sm">Headphones Image</span>
-              </div>
+          {/* Image */}
+          <div className="order-1 lg:order-2 flex justify-center">
+            <div className="relative w-80 h-80 lg:w-96 lg:h-96 xl:w-[450px] xl:h-[450px] ">
+              <Image
+                src="/assets/home/desktop/image-hero.jpg"
+                alt="XX99 Mark II Headphones"
+                fill
+                className="object-cover rounded-full "
+                priority
+              />
             </div>
           </div>
         </div>

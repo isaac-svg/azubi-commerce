@@ -17,7 +17,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
   return (
     <>
       <nav className={`bg-neutral-900 text-white ${className}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto  border-b-neutral-600 border-b-1">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Mobile menu button */}
             <button
@@ -52,25 +52,25 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
             <div className="hidden lg:flex space-x-8">
               <Link
                 href="/"
-                className="text-sm font-medium hover:text-primary-500 transition-colors uppercase tracking-wider"
+                className="text-sm font-medium hover:text-rust transition-colors uppercase tracking-wider"
               >
                 Home
               </Link>
               <Link
                 href="/headphones"
-                className="text-sm font-medium hover:text-primary-500 transition-colors uppercase tracking-wider"
+                className="text-sm font-medium hover:text-rust transition-colors uppercase tracking-wider"
               >
                 Headphones
               </Link>
               <Link
                 href="/speakers"
-                className="text-sm font-medium hover:text-primary-500 transition-colors uppercase tracking-wider"
+                className="text-sm font-medium hover:text-rust transition-colors uppercase tracking-wider"
               >
                 Speakers
               </Link>
               <Link
                 href="/earphones"
-                className="text-sm font-medium hover:text-primary-500 transition-colors uppercase tracking-wider"
+                className="text-sm font-medium hover:text-rust transition-colors uppercase tracking-wider"
               >
                 Earphones
               </Link>
