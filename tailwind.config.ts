@@ -87,6 +87,7 @@ const config: Config = {
         card: "0 2px 4px rgba(0, 0, 0, 0.1)",
         form: "0 1px 3px rgba(0, 0, 0, 0.1)",
       },
+
       // Animation and transitions
       transitionDuration: {
         "250": "250ms",

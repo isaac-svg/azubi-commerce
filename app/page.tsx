@@ -1,9 +1,21 @@
-import React from "react";
+import {
+  Navigation,
+  Hero,
+  ProductCategories,
+  FeaturedProducts,
+  AboutSection,
+  Footer,
+} from "@/components";
 
-type Props = {};
-
-const page = (props: Props) => {
-  return <div>page</div>;
-};
-
-export default page;
+export default function Home() {
+  return (
+    <main className="min-h-screen">
+      <Navigation />
+      <Hero />
+      <ProductCategories />
+      <FeaturedProducts />
+      <AboutSection />
+      <Footer />
+    </main>
+  );
+}
