@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { Cart } from "./index";
 
 interface NavigationProps {
   className?: string;
@@ -9,6 +10,7 @@ interface NavigationProps {
 
 export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -77,7 +79,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
             </div>
 
             {/* Cart Icon */}
-            <button className="p-2" aria-label="Shopping cart">
+            <button className="p-2" aria-label="Shopping cart" onClick={() => setIsCartOpen(true)}>
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -161,6 +163,9 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
           </div>
         </div>
       )}
+
+      {/* Cart Modal */}
+      <Cart open={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
 };

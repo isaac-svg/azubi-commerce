@@ -7,3 +7,5 @@ export { default as ProductCategories } from "./ProductCategories";
 export { default as FeaturedProducts } from "./FeaturedProducts";
 export { default as AboutSection } from "./AboutSection";
 export { default as Footer } from "./Footer";
+export { CartProvider, useCart } from "./CartContext";
+export { default as Cart } from "./Cart";
