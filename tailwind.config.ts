@@ -17,8 +17,8 @@ const config: Config = {
           200: "#fbd8c3",
           300: "#f7b895",
           400: "#f19565",
-          500: "#ed7043", // Main orange color
-          600: "#de5328",
+          500: "#d87d4a", // Main orange color from design system
+          600: "#c7703a",
           700: "#b93f1e",
           800: "#93351e",
           900: "#772e1c",
@@ -26,7 +26,7 @@ const config: Config = {
         // Neutral colors
         neutral: {
           50: "#fafafa",
-          100: "#f5f5f5",
+          100: "#f1f1f1", // Light gray from design system
           200: "#e5e5e5",
           300: "#d4d4d4",
           400: "#a3a3a3",
@@ -34,18 +34,19 @@ const config: Config = {
           600: "#525252",
           700: "#404040",
           800: "#262626",
-          900: "#171717",
-          950: "#0a0a0a",
+          900: "#101010", // Charcoal from design system
+          950: "#000000", // Black from design system
         },
         // Semantic colors
         background: "var(--background)",
         foreground: "var(--foreground)",
         // Design system specific colors
-        rust: "#ed7043",
-        charcoal: "#1a1a1a",
-        light: "#f7f7f7",
-        dark: "#0a0a0a",
-        peach: "#fea780",
+        rust: "#d87d4a",
+        charcoal: "#101010",
+        light: "#f1f1f1",
+        dark: "#000000",
+        peach: "#fbaf85",
+        error: "#cd2c2c",
       },
       // Typography based on Manrope font family
       fontFamily: {

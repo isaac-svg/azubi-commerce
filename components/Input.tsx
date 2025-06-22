@@ -5,12 +5,14 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
   helperText?: string;
+  variant?: "default" | "compact";
 }
 
 export const Input: React.FC<InputProps> = ({
   label,
   error,
   helperText,
+  variant = "default",
   className = "",
   id,
   ...props
@@ -19,23 +21,50 @@ export const Input: React.FC<InputProps> = ({
   const inputClasses = `input ${error ? "input-error" : ""} ${className}`;
 
   return (
-    <div className="space-y-1">
+    <div className={variant === "compact" ? "space-y-1" : "space-y-2"}>
       {label && (
-        <label
-          htmlFor={inputId}
-          className="block text-sm font-medium text-gray-700"
-        >
-          {label}
-        </label>
+        <div className=" flex justify-between flex-row items-center">
+          <label
+            htmlFor={inputId}
+            className={`block text-xs font-semibold uppercase tracking-tight ${
+              error ? "text-error" : "text-neutral-900"
+            }`}
+          >
+            {label}
+          </label>
+
+          {error && (
+            <p
+              id={`${inputId}-error`}
+              className="block text-xs text-error font-medium tracking-tight"
+              role="alert"
+            >
+              {error}
+            </p>
+          )}
+        </div>
       )}
-      <input id={inputId} className={inputClasses} {...props} />
-      {error && (
-        <p className="text-sm text-red-600" role="alert">
-          {error}
-        </p>
-      )}
+      <input
+        id={inputId}
+        className={inputClasses}
+        {...props}
+        aria-invalid={error ? "true" : "false"}
+        aria-describedby={
+          error
+            ? `${inputId}-error`
+            : helperText
+            ? `${inputId}-help`
+            : undefined
+        }
+      />
+
       {helperText && !error && (
-        <p className="text-sm text-gray-500">{helperText}</p>
+        <p
+          id={`${inputId}-help`}
+          className="text-xs text-neutral-600 font-medium"
+        >
+          {helperText}
+        </p>
       )}
     </div>
   );

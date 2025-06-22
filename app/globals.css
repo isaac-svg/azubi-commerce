@@ -5,43 +5,44 @@
   --background: #ffffff;
   --foreground: #171717;
 
-  /* Design system colors */
-  --color-rust: #ed7043;
-  --color-charcoal: #1a1a1a;
-  --color-light: #f7f7f7;
-  --color-dark: #0a0a0a;
-  --color-peach: #fea780;
+  /* Design system colors from spec */
+  --color-rust: #d87d4a;
+  --color-charcoal: #101010;
+  --color-light: #f1f1f1;
+  --color-dark: #000000;
+  --color-peach: #fbaf85;
+
+  /* Additional colors from design system */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-100: #fafafa;
+  --color-gray-200: #f1f1f1;
 
   /* Semantic colors */
-  --color-primary: #ed7043;
-  --color-secondary: #1a1a1a;
-  --color-accent: #fea780;
+  --color-primary: #d87d4a;
+  --color-secondary: #101010;
+  --color-accent: #fbaf85;
 
   /* Form colors */
-  --color-error: #ef4444;
+  --color-error: #fd0505 !important;
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-info: #3b82f6;
 }
 
-@theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: "Manrope", var(--font-geist-sans), system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-
-  /* Custom colors */
-  --color-rust: #ed7043;
-  --color-charcoal: #1a1a1a;
-  --color-light: #f7f7f7;
-  --color-dark: #0a0a0a;
-  --color-peach: #fea780;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: "Manrope", var(--font-geist-sans), system-ui, sans-serif;
+    --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+    /* Custom colors matching design system */
+    --color-rust: #d87d4a;
+    --color-charcoal: #101010;
+    --color-light: #f1f1f1;
+    --color-dark: #000000;
+    --color-peach: #fbaf85;
   }
 }
 
@@ -57,32 +58,33 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
+  border-radius: 0;
+  padding: 15px 30px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   transition: all 0.25s ease;
   outline: none;
   cursor: pointer;
   border: none;
   text-decoration: none;
+  font-family: "Manrope", sans-serif;
 }
 
 .btn:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  box-shadow: 0 0 0 2px var(--color-rust), 0 0 0 4px rgba(237, 112, 67, 0.1);
+  box-shadow: 0 0 0 2px var(--color-rust), 0 0 0 4px rgba(216, 125, 74, 0.1);
 }
 
 .btn-primary {
   background-color: var(--color-rust);
   color: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .btn-primary:hover {
-  background-color: rgba(237, 112, 67, 0.9);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background-color: #c7703a;
 }
 
 .btn-secondary {
@@ -105,77 +107,325 @@ body {
   background-color: var(--color-light);
 }
 
-/* Form input styles */
+/* Additional hover states and interactive elements */
+a:hover {
+  transition: color 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+/* Form input styles matching design system */
 .input {
   display: block;
   width: 100%;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  color: var(--foreground);
-  background-color: var(--background);
+  border: 1px solid #cfcfcf;
+  padding: 18px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  background-color: var(--color-white);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: "Manrope", sans-serif;
 }
 
 .input::placeholder {
-  color: #6b7280;
+  color: #cfcfcf;
+  opacity: 0.4;
+  font-weight: 700;
 }
 
 .input:focus {
   outline: none;
   border-color: var(--color-rust);
-  box-shadow: 0 0 0 1px var(--color-rust);
+  caret-color: var(--color-rust);
 }
 
 .input-error {
-  border-color: var(--color-error);
+  border-color: var(--color-error) !important;
+  border-width: 1.75px !important;
 }
 
 .input-error:focus {
   border-color: var(--color-error);
-  box-shadow: 0 0 0 1px var(--color-error);
+  caret-color: var(--color-error);
 }
 
-/* Typography utilities */
-.text-display-1 {
-  font-size: 4rem;
-  line-height: 1.1;
-  font-weight: 400;
+/* Additional input states */
+.input-warning {
+  border-color: var(--color-warning);
+}
+.text-error {
+  color: red;
+}
+.input-warning:focus {
+  border-color: var(--color-warning);
+  caret-color: var(--color-warning);
 }
 
-.text-display-2 {
-  font-size: 3rem;
-  line-height: 1.15;
-  font-weight: 400;
+.input-success {
+  border-color: var(--color-success);
 }
 
-.desktop-hero {
-  background-image: url("/assets/home/mobile/image-header.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 70vh;
-  top: 0;
+.input-success:focus {
+  border-color: var(--color-success);
+  caret-color: var(--color-success);
 }
 
-@media (min-width: 640px) {
-  /* sm */
-  .desktop-hero {
-    background-image: url("/assets/home/tablet/image-header.jpg");
+/* Radio button styles */
+.radio-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 18px 16px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  transition: border-color 0.15s ease;
+}
+
+.radio-button:hover {
+  border-color: var(--color-rust);
+}
+
+.radio-button.selected {
+  border-color: var(--color-rust);
+}
+
+.radio-button input[type="radio"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #cfcfcf;
+  border-radius: 50%;
+  margin-right: 16px;
+  position: relative;
+}
+
+.radio-button input[type="radio"]:checked {
+  border-color: var(--color-rust);
+}
+
+.radio-button input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-rust);
+  border-radius: 50%;
+}
+
+/* Quantity input styling */
+.quantity-input {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-light);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.quantity-input button {
+  background-color: transparent;
+  border: none;
+  padding: 15px 16px;
+  color: var(--color-charcoal);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  opacity: 0.25;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.quantity-input button:hover {
+  background-color: rgba(216, 125, 74, 0.1);
+  color: var(--color-rust);
+  opacity: 1;
+}
+
+.quantity-input input {
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  width: 40px;
+  padding: 15px 0;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--color-charcoal);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.quantity-input input:focus {
+  outline: none;
+}
+
+/* Product card hover effects */
+.product-card {
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Cart item styling */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cart-item-image {
+  width: 64px;
+  height: 64px;
+  background-color: var(--color-light);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-item-details h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  margin-bottom: 4px;
+}
+
+.cart-item-details p {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  opacity: 0.5;
+}
+
+/* Order summary styling */
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.summary-item span:first-child {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-charcoal);
+  text-transform: uppercase;
+}
+
+.summary-item span:last-child {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  margin-top: 24px;
+  border-top: 1px solid #f1f1f1;
+}
+
+.summary-total span:first-child {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-charcoal);
+  text-transform: uppercase;
+}
+
+.summary-total span:last-child {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-rust);
+}
+
+/* Navigation hover effects */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-rust);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-rust);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (min-width: 768px) {
-  /* md */
-  .desktop-hero {
-    height: 100vh;
-  }
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
 }
 
-@media (min-width: 1024px) {
-  /* lg */
-  .desktop-hero {
-    background-image: url("/assets/home/desktop/image-hero.jpg");
-    top: -20px;
-  }
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-rust);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(237, 112, 67, 0.8);
 }

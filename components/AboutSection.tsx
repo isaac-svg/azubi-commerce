@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 interface AboutSectionProps {
   className?: string;
@@ -30,10 +31,13 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
           {/* Image */}
           <div className="order-1 lg:order-2">
-            <div className="w-full h-64 lg:h-96 bg-gray-300 rounded-lg lg:rounded-xl flex items-center justify-center">
-              <span className="text-gray-500 text-sm lg:text-base">
-                Person with Headphones Image
-              </span>
+            <div className="relative w-full h-64 lg:h-96 rounded-lg overflow-hidden">
+              <Image
+                src="/assets/shared/desktop/image-best-gear.jpg"
+                alt="Person enjoying music with headphones"
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
         </div>

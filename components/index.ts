@@ -1,6 +1,7 @@
 export { default as Button } from "./Button";
 export { default as Input } from "./Input";
 export { default as Card } from "./Card";
+export { default as QuantityInput } from "./QuantityInput";
 export { default as Navigation } from "./Navigation";
 export { default as Hero } from "./Hero";
 export { default as ProductCategories } from "./ProductCategories";
@@ -9,3 +10,4 @@ export { default as AboutSection } from "./AboutSection";
 export { default as Footer } from "./Footer";
 export { CartProvider, useCart } from "./CartContext";
 export { default as Cart } from "./Cart";
+export { default as OrderConfirmationModal } from "./OrderConfirmationModal";

@@ -50,7 +50,6 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
               audiophile
             </Link>
 
-            {/* Desktop Navigation */}
             <div className="hidden lg:flex space-x-8">
               <Link
                 href="/"
@@ -79,7 +78,11 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
             </div>
 
             {/* Cart Icon */}
-            <button className="p-2" aria-label="Shopping cart" onClick={() => setIsCartOpen(true)}>
+            <button
+              className="p-2"
+              aria-label="Shopping cart"
+              onClick={() => setIsCartOpen(true)}
+            >
               <svg
                 className="w-6 h-6"
                 fill="none"

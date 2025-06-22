@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 import { useCart } from "./CartContext";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface CartProps {
   open: boolean;
@@ -9,18 +11,26 @@ interface CartProps {
 
 const Cart: React.FC<CartProps> = ({ open, onClose }) => {
   const { items, updateQuantity, clearCart, total } = useCart();
-
+  const router = useRouter();
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+      onClick={onClose}
+    >
       <div
         className="bg-white rounded-xl shadow-xl w-full max-w-md mx-auto p-6 relative"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold tracking-widest uppercase">Cart ({items.length})</h2>
-          <button className="text-gray-500 hover:text-primary-500 text-sm" onClick={clearCart}>
+          <h2 className="text-xl font-bold tracking-widest uppercase">
+            Cart ({items.length})
+          </h2>
+          <button
+            className="text-gray-500 hover:text-primary-500 text-sm"
+            onClick={clearCart}
+          >
             Remove all
           </button>
         </div>
@@ -31,11 +41,21 @@ const Cart: React.FC<CartProps> = ({ open, onClose }) => {
             items.map((item) => (
               <div key={item.slug} className="flex items-center gap-4">
                 <div className="bg-neutral-100 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <Image src={item.image} alt={item.name} width={48} height={48} className="object-contain rounded-lg" />
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    width={48}
+                    height={48}
+                    className="object-contain rounded-lg"
+                  />
                 </div>
                 <div className="flex-1">
-                  <div className="font-bold text-sm uppercase leading-tight">{item.name}</div>
-                  <div className="text-gray-500 text-sm">$ {item.price.toLocaleString()}</div>
+                  <div className="font-bold text-sm uppercase leading-tight">
+                    {item.name}
+                  </div>
+                  <div className="text-gray-500 text-sm">
+                    $ {item.price.toLocaleString()}
+                  </div>
                 </div>
                 <div className="flex items-center gap-1 bg-neutral-100 rounded">
                   <button
@@ -45,7 +65,9 @@ const Cart: React.FC<CartProps> = ({ open, onClose }) => {
                   >
                     -
                   </button>
-                  <span className="px-2 w-6 text-center select-none">{item.quantity}</span>
+                  <span className="px-2 w-6 text-center select-none">
+                    {item.quantity}
+                  </span>
                   <button
                     className="px-2 py-1 text-gray-400 hover:text-primary-500 text-lg"
                     onClick={() => updateQuantity(item.slug, item.quantity + 1)}
@@ -64,6 +86,7 @@ const Cart: React.FC<CartProps> = ({ open, onClose }) => {
         <button
           className="w-full btn btn-primary py-4 text-base font-bold uppercase tracking-wider rounded"
           disabled={items.length === 0}
+          onClick={() => router.push("/checkout")}
         >
           Checkout
         </button>
@@ -72,4 +95,4 @@ const Cart: React.FC<CartProps> = ({ open, onClose }) => {
   );
 };
 
-export default Cart; 
+export default Cart;
