@@ -162,4 +162,4 @@ The application successfully meets all specified requirements:
 - ✅ Order confirmation modal with summary
 
 
-![alt text](<localhost_3000_ (1).png>)
+![project screenshot](<localhost_3000_ (1).png>)
