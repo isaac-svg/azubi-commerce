@@ -24,7 +24,7 @@ const Cart: React.FC<CartProps> = ({ open, onClose }) => {
       const timer = setTimeout(() => {
         setShouldRender(false);
         setIsClosing(false);
-      }, 300);
+      }, 400);
       return () => clearTimeout(timer);
     }
   }, [open, shouldRender]);
@@ -33,7 +33,7 @@ const Cart: React.FC<CartProps> = ({ open, onClose }) => {
     setIsClosing(true);
     setTimeout(() => {
       onClose();
-    }, 300);
+    }, 400);
   };
 
   if (!shouldRender) return null;
