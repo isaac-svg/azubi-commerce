@@ -15,7 +15,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           {/* Content */}
           <div className="order-2 lg:order-1">
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-neutral-900 mb-6 lg:mb-8 leading-tight">
-              BRINGING YOU THE <span className="text-primary-500">BEST</span>{" "}
+              BRINGING YOU THE <span className="text-[var(--color-rust)]">BEST</span>{" "}
               AUDIO GEAR
             </h2>
             <p className="text-gray-600 text-base lg:text-lg leading-relaxed">

@@ -23,12 +23,14 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Mobile menu button */}
             <button
-              className="lg:hidden p-2"
+              className="lg:hidden p-2 transition-transform duration-200 hover:scale-110 active:scale-95"
               onClick={toggleMobileMenu}
               aria-label="Toggle menu"
             >
               <svg
-                className="w-6 h-6"
+                className={`w-6 h-6 transition-transform duration-300 ${
+                  isMobileMenuOpen ? "rotate-90" : "rotate-0"
+                }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -79,12 +81,12 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
 
             {/* Cart Icon */}
             <button
-              className="p-2"
+              className="p-2 transition-transform duration-200 hover:scale-110 active:scale-95"
               aria-label="Shopping cart"
               onClick={() => setIsCartOpen(true)}
             >
               <svg
-                className="w-6 h-6"
+                className="w-6 h-6 transition-colors duration-200 hover:text-orange-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -104,17 +106,17 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 z-50 bg-black bg-opacity-50"
+          className="lg:hidden fixed inset-0 z-50 bg-black bg-opacity-50 animate-in fade-in duration-300"
           onClick={toggleMobileMenu}
         >
           <div
-            className="fixed inset-y-0 left-0 w-full bg-white shadow-xl overflow-y-auto"
+            className="fixed inset-y-0 left-0 w-full bg-white shadow-xl overflow-y-auto transform transition-transform duration-300 ease-out animate-in slide-in-from-left-full"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6">
               <button
                 onClick={toggleMobileMenu}
-                className="absolute top-4 right-4 p-2 text-gray-500 hover:text-gray-700 z-10"
+                className="absolute top-4 right-4 p-2 text-gray-500 hover:text-gray-700 z-10 transition-colors duration-200"
                 aria-label="Close menu"
               >
                 <svg
@@ -132,7 +134,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
                 </svg>
               </button>
 
-              <div className="mt-16 max-h-[5screen0vh] ">
+              <div className="mt-16 max-h-[50vh] animate-in slide-in-from-top-4 fade-in duration-500 delay-150">
                 <ProductCategories className="py-8" onCategoryClick={toggleMobileMenu} />
               </div>
             </div>
