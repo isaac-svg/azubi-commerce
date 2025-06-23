@@ -1,12 +1,4 @@
-import data from "@/public/data.json";
-
-// Fix image paths by removing ./ prefix and ensuring they start with /
-function fixImagePath(path: string): string {
-  if (path.startsWith("./")) {
-    return "/" + path.substring(2);
-  }
-  return path.startsWith("/") ? path : "/" + path;
-}
+import { supabase } from "./supabase";
 
 export interface Product {
   id: number;
@@ -59,65 +51,93 @@ export interface Product {
   }>;
 }
 
-// Get all products
-export function getAllProducts(): Product[] {
-  return (data as Product[]).map((product) => ({
-    ...product,
+// Transform database row to Product interface
+function transformProduct(row: any): Product {
+  return {
+    id: row.id,
+    slug: row.slug,
+    name: row.name,
     image: {
-      mobile: fixImagePath(product.image.mobile),
-      tablet: fixImagePath(product.image.tablet),
-      desktop: fixImagePath(product.image.desktop),
+      mobile: row.image_mobile,
+      tablet: row.image_tablet,
+      desktop: row.image_desktop,
     },
+    category: row.category,
     categoryImage: {
-      mobile: fixImagePath(product.categoryImage.mobile),
-      tablet: fixImagePath(product.categoryImage.tablet),
-      desktop: fixImagePath(product.categoryImage.desktop),
+      mobile: row.category_image_mobile,
+      tablet: row.category_image_tablet,
+      desktop: row.category_image_desktop,
     },
-    gallery: {
-      first: {
-        mobile: fixImagePath(product.gallery.first.mobile),
-        tablet: fixImagePath(product.gallery.first.tablet),
-        desktop: fixImagePath(product.gallery.first.desktop),
-      },
-      second: {
-        mobile: fixImagePath(product.gallery.second.mobile),
-        tablet: fixImagePath(product.gallery.second.tablet),
-        desktop: fixImagePath(product.gallery.second.desktop),
-      },
-      third: {
-        mobile: fixImagePath(product.gallery.third.mobile),
-        tablet: fixImagePath(product.gallery.third.tablet),
-        desktop: fixImagePath(product.gallery.third.desktop),
-      },
-    },
-    others: product.others.map((other) => ({
-      ...other,
-      image: {
-        mobile: fixImagePath(other.image.mobile),
-        tablet: fixImagePath(other.image.tablet),
-        desktop: fixImagePath(other.image.desktop),
-      },
-    })),
-  }));
+    new: row.new,
+    price: row.price,
+    description: row.description,
+    features: row.features,
+    includes: row.includes,
+    gallery: row.gallery,
+    others: row.others,
+  };
+}
+
+// Get all products
+export async function getAllProducts(): Promise<Product[]> {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .order('id');
+
+  if (error) {
+    console.error('Error fetching products:', error);
+    return [];
+  }
+
+  return data?.map(transformProduct) || [];
 }
 
 // Get products by category
-export function getProductsByCategory(category: string): Product[] {
-  return getAllProducts().filter(
-    (product: Product) => product.category === category
-  );
+export async function getProductsByCategory(category: string): Promise<Product[]> {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .eq('category', category)
+    .order('id');
+
+  if (error) {
+    console.error('Error fetching products by category:', error);
+    return [];
+  }
+
+  return data?.map(transformProduct) || [];
 }
 
 // Get product by slug
-export function getProductBySlug(slug: string): Product | undefined {
-  return getAllProducts().find((product: Product) => product.slug === slug);
+export async function getProductBySlug(slug: string): Promise<Product | null> {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+
+  if (error) {
+    console.error('Error fetching product by slug:', error);
+    return null;
+  }
+
+  return data ? transformProduct(data) : null;
 }
 
 // Get all categories
-export function getAllCategories(): string[] {
-  const categories = getAllProducts().map(
-    (product: Product) => product.category
-  );
+export async function getAllCategories(): Promise<string[]> {
+  const { data, error } = await supabase
+    .from('products')
+    .select('category')
+    .order('category');
+
+  if (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
+
+  const categories = data?.map(item => item.category) || [];
   return [...new Set(categories)];
 }
 
@@ -132,11 +152,20 @@ export function getCategoryDisplayName(category: string): string {
 }
 
 // Get recommended products (others)
-export function getRecommendedProducts(currentProduct: Product): Product[] {
-  return currentProduct.others
-    .map((other) => {
-      const product = getProductBySlug(other.slug);
-      return product;
-    })
-    .filter(Boolean) as Product[];
+export async function getRecommendedProducts(currentProduct: Product): Promise<Product[]> {
+  const recommendedSlugs = currentProduct.others.map(other => other.slug);
+  
+  if (recommendedSlugs.length === 0) return [];
+
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .in('slug', recommendedSlugs);
+
+  if (error) {
+    console.error('Error fetching recommended products:', error);
+    return [];
+  }
+
+  return data?.map(transformProduct) || [];
 }

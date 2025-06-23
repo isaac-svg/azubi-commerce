@@ -21,16 +21,24 @@ interface CategoryPageProps {
   }>;
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
-  const { category } = React.use(params);
-  const validCategories = getAllCategories();
+// Generate static params for all categories
+export async function generateStaticParams() {
+  const categories = await getAllCategories();
+  return categories.map((category) => ({
+    category: category,
+  }));
+}
+
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { category } = await params;
+  const validCategories = await getAllCategories();
 
   // Check if category is valid
   if (!validCategories.includes(category)) {
     notFound();
   }
 
-  const products = getProductsByCategory(category);
+  const products = await getProductsByCategory(category);
   const categoryDisplayName = getCategoryDisplayName(category);
 
   return (

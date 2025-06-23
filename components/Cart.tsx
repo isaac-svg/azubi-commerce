@@ -73,7 +73,7 @@ const Cart: React.FC<CartProps> = ({ open, onClose }) => {
             items.map((item, index) => (
               <div 
                 key={item.slug} 
-                className={`flex items-center gap-4 transform transition-all duration-300 hover:scale-[1.02] ${
+                className={`flex items-center gap-4 transform transition-all duration-300 hover:bg-neutral-100/20 ${
                   isClosing ? 'translate-x-4 opacity-0' : 'translate-x-0 opacity-100'
                 }`}
                 style={{ 
@@ -99,7 +99,7 @@ const Cart: React.FC<CartProps> = ({ open, onClose }) => {
                 </div>
                 <div className="flex items-center gap-1 bg-neutral-100 rounded transition-all duration-200 hover:bg-neutral-200">
                   <button
-                    className="px-2 py-1 text-gray-400 hover:text-primary-500 text-lg transition-all duration-200 hover:scale-110 active:scale-95"
+                    className="px-2 py-1 text-gray-400 hover:text-primary-500 text-lg transition-all duration-200  active:scale-95"
                     onClick={() => updateQuantity(item.slug, item.quantity - 1)}
                     disabled={item.quantity <= 1}
                   >
@@ -109,7 +109,7 @@ const Cart: React.FC<CartProps> = ({ open, onClose }) => {
                     {item.quantity}
                   </span>
                   <button
-                    className="px-2 py-1 text-gray-400 hover:text-primary-500 text-lg transition-all duration-200 hover:scale-110 active:scale-95"
+                    className="px-2 py-1 text-gray-400 hover:text-primary-500 text-lg transition-all duration-200  active:scale-95"
                     onClick={() => updateQuantity(item.slug, item.quantity + 1)}
                   >
                     +
