@@ -13,6 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { notFound } from "next/navigation";
+import { toast } from "sonner"
 
 interface ProductDetailPageProps {
   params: Promise<{
@@ -50,7 +51,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 mb-20">
           {/* Image */}
           <div className="w-full max-w-xs sm:max-w-sm lg:max-w-md flex-shrink-0">
-            <div className="bg-neutral-100 rounded-lg flex items-center justify-center aspect-square w-full h-auto">
+            <div className=" rounded-lg flex items-center justify-center aspect-square w-full h-auto">
               <Image
                 src={product.image.desktop}
                 alt={product.name}
@@ -92,7 +93,9 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                     },
                     qty
                   );
-                  alert("Added to cart!");
+                  toast("Added to cart!", {
+                    className: "bg-green-500"
+                  });
                 }}
               >
                 Add to Cart
@@ -161,12 +164,12 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
           <div className="grid md:grid-cols-3 gap-8">
             {product.others.map((item) => (
               <div key={item.slug} className="text-center">
-                <div className="bg-neutral-100 rounded-lg flex items-center justify-center aspect-square w-full h-auto mb-6">
+                <div className="rounded-lg flex items-center justify-center aspect-square w-full h-auto mb-6">
                   <Image
                     src={item.image.desktop}
                     alt={item.name}
-                    width={250}
-                    height={250}
+                    width={350}
+                    height={350}
                     className="object-contain rounded-lg"
                   />
                 </div>

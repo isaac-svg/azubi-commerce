@@ -6,54 +6,40 @@ interface CategoryCardProps {
   title: string;
   href: string;
   image: string;
+  onCategoryClick?: () => void;
 }
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ title, href, image }) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({ title, href, image, onCategoryClick }) => {
   return (
-    <Link href={href} className="group">
-      <div className=" rounded-xl text-center hover:shadow-xl transition-all duration-300 p-8 flex flex-col items-center">
-        {/* Image */}
-        <div className="mb-6">
-          <Image
-            src={image}
-            alt={title}
-            width={160}
+    <Link key={title} href={`${href}`} className='relative bg-gray-100 flex flex-col items-center text-center gap-4 pt-20 pb-6 rounded-lg mx-6'
+               onClick={onCategoryClick}
+               >
+               <Image
+                  alt={`a png of a ${title}`}
+                  src={`${image}`}
+                   width={160}
             height={160}
-            className="object-contain"
-          />
-        </div>
+                  className='absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-9 max-w-[150px]' />
 
-        {/* Content */}
-        <h3 className="text-lg font-bold uppercase tracking-widest mb-3 text-neutral-900">
-          {title}
-        </h3>
-        <div className="flex items-center text-sm font-medium text-gray-500 group-hover:text-orange-500 transition-colors">
-          <span className="uppercase tracking-widest mr-2">Shop</span>
-          <svg
-            className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </div>
-      </div>
-    </Link>
+               <p className='text-base font-bold tracking-wide text-black opacity-100'>{title}</p>
+
+               <div className='flex items-center justify-center gap-2'>
+                  <p className='text-sm opacity-50'>shop</p>
+
+                  <div className='w-2 h-2 border-t-2 border-r-2 border-orange-500 transform rotate-45'></div>
+               </div>
+            </Link>
   );
 };
 
 interface ProductCategoriesProps {
   className?: string;
+  onCategoryClick?: () => void;
 }
 
 export const ProductCategories: React.FC<ProductCategoriesProps> = ({
   className = "",
+  onCategoryClick,
 }) => {
   const categories = [
     {
@@ -74,7 +60,7 @@ export const ProductCategories: React.FC<ProductCategoriesProps> = ({
   ];
 
   return (
-    <section className={`py-16 lg:py-24  ${className}`}>
+    <section className={`py-16 lg:py-24 bg-white  ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {categories.map((category) => (
@@ -83,6 +69,7 @@ export const ProductCategories: React.FC<ProductCategoriesProps> = ({
               title={category.title}
               href={category.href}
               image={category.image}
+              onCategoryClick={onCategoryClick}
             />
           ))}
         </div>

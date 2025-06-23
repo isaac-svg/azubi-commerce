@@ -19,8 +19,6 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  // Show only first item and count of others
-  const firstItem = items[0];
   const otherItemsCount = items.length - 1;
 
   return (
@@ -37,8 +35,8 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
             <Image
               src="/assets/checkout/icon-order-confirmation.svg"
               alt="Order confirmed"
-              width={24}
-              height={24}
+              width={64}
+              height={64}
               className="text-white"
             />
           </div>
@@ -53,14 +51,13 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
         </div>
 
         <div className="bg-neutral-50 rounded-lg overflow-hidden mb-6">
-          {/* First item */}
           <div className="p-6 border-b border-gray-200">
-            {firstItem && (
-              <div className="flex items-center gap-4">
+            {items.map((item)=> (
+              <div className="flex items-center gap-4 py-1">
                 <div className="bg-neutral-100 rounded-lg w-12 h-12 flex items-center justify-center">
                   <Image
-                    src={firstItem.image}
-                    alt={firstItem.name}
+                    src={item.image}
+                    alt={item.name}
                     width={32}
                     height={32}
                     className="object-contain rounded-lg"
@@ -68,17 +65,17 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
                 </div>
                 <div className="flex-1">
                   <div className="font-bold text-sm uppercase leading-tight">
-                    {firstItem.name}
+                    {item.name}
                   </div>
                   <div className="text-gray-500 text-sm">
-                    $ {firstItem.price.toLocaleString()}
+                    $ {item.price.toLocaleString()}
                   </div>
                 </div>
                 <span className="text-gray-400 font-bold">
-                  x{firstItem.quantity}
+                  x{item.quantity}
                 </span>
               </div>
-            )}
+            ))}
           </div>
 
           {/* Other items count */}

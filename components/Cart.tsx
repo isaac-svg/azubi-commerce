@@ -16,11 +16,11 @@ const Cart: React.FC<CartProps> = ({ open, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+      className="fixed inset-0 z-50 flex items-start  justify-center md:items-start md:justify-end bg-black/50 bg-opacity-50"
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-xl shadow-xl w-full max-w-md mx-auto p-6 relative"
+        className="bg-white rounded-xl shadow-xl w-full max-w-md mx-auto md:mx-0 p-6 relative md:mr-20 mt-28 "
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-6">

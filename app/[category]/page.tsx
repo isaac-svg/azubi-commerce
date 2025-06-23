@@ -55,7 +55,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
           >
             {/* Image */}
             <div className="w-full max-w-xs sm:max-w-sm lg:max-w-md flex-shrink-0">
-              <div className="bg-neutral-100 rounded-lg flex items-center justify-center aspect-square w-full h-auto">
+              <div className=" rounded-lg flex items-center justify-center aspect-square w-full h-auto">
                 <Image
                   src={product.categoryImage.desktop}
                   alt={product.name}

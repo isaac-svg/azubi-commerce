@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Cart } from "./index";
+import { Cart, ProductCategories } from "./index";
 
 interface NavigationProps {
   className?: string;
@@ -53,25 +53,25 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
             <div className="hidden lg:flex space-x-8">
               <Link
                 href="/"
-                className="text-sm font-medium hover:text-rust transition-colors uppercase tracking-wider"
+                className= "hover:text-[var(--color-rust)] text-sm font-medium hover:text-rust transition-colors uppercase tracking-wider"
               >
                 Home
               </Link>
               <Link
                 href="/headphones"
-                className="text-sm font-medium hover:text-rust transition-colors uppercase tracking-wider"
+                className="hover:text-[var(--color-rust)] text-sm font-medium hover:text-rust transition-colors uppercase tracking-wider"
               >
                 Headphones
               </Link>
               <Link
                 href="/speakers"
-                className="text-sm font-medium hover:text-rust transition-colors uppercase tracking-wider"
+                className="hover:text-[var(--color-rust)] text-sm font-medium hover:text-rust transition-colors uppercase tracking-wider"
               >
                 Speakers
               </Link>
               <Link
                 href="/earphones"
-                className="text-sm font-medium hover:text-rust transition-colors uppercase tracking-wider"
+                className="hover:text-[var(--color-rust)] text-sm font-medium hover:text-rust transition-colors uppercase tracking-wider"
               >
                 Earphones
               </Link>
@@ -108,13 +108,13 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
           onClick={toggleMobileMenu}
         >
           <div
-            className="fixed inset-y-0 left-0 w-64 bg-white shadow-xl"
+            className="fixed inset-y-0 left-0 w-full bg-white shadow-xl overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6">
               <button
                 onClick={toggleMobileMenu}
-                className="absolute top-4 right-4 p-2 text-gray-500 hover:text-gray-700"
+                className="absolute top-4 right-4 p-2 text-gray-500 hover:text-gray-700 z-10"
                 aria-label="Close menu"
               >
                 <svg
@@ -132,35 +132,8 @@ export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
                 </svg>
               </button>
 
-              <div className="mt-8">
-                <Link
-                  href="/"
-                  className="block text-lg font-medium text-gray-900 py-3 uppercase tracking-wider hover:text-primary-500 transition-colors"
-                  onClick={toggleMobileMenu}
-                >
-                  Home
-                </Link>
-                <Link
-                  href="/headphones"
-                  className="block text-lg font-medium text-gray-900 py-3 uppercase tracking-wider hover:text-rust transition-colors"
-                  onClick={toggleMobileMenu}
-                >
-                  Headphones
-                </Link>
-                <Link
-                  href="/speakers"
-                  className="block text-lg font-medium text-gray-900 py-3 uppercase tracking-wider hover:text-rust transition-colors"
-                  onClick={toggleMobileMenu}
-                >
-                  Speakers
-                </Link>
-                <Link
-                  href="/earphones"
-                  className="block text-lg font-medium text-gray-900 py-3 uppercase tracking-wider hover:text-rust transition-colors"
-                  onClick={toggleMobileMenu}
-                >
-                  Earphones
-                </Link>
+              <div className="mt-16 max-h-[5screen0vh] ">
+                <ProductCategories className="py-8" onCategoryClick={toggleMobileMenu} />
               </div>
             </div>
           </div>
