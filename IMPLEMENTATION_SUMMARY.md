@@ -161,4 +161,5 @@ The application successfully meets all specified requirements:
 - ✅ Accurate order totals with shipping and VAT
 - ✅ Order confirmation modal with summary
 
-The design system is consistent, accessible, and provides a smooth user experience across all features.
+
+![alt text](<localhost_3000_ (1).png>)

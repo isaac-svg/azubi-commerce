@@ -1,4 +1,3 @@
-// Utility functions for handling product data
 import data from "@/public/data.json";
 
 // Fix image paths by removing ./ prefix and ensuring they start with /
